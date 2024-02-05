@@ -1,0 +1,29 @@
+version: '2'
+services:
+  mysql:
+      image: 'mysql:8.0'
+    #   container_name: 'mhmysql'
+      environment:
+          MYSQL_ROOT_PASSWORD: elka
+          MYSQL_PASSWORD: elka
+          MYSQL_USER: elka
+          MYSQL_DATABASE: elka
+
+      volumes:
+            - "./dumpdb:/docker-entrypoint-initdb.d"
+            - "./docker/etc/mysql/my.cnf:/etc/mysql/conf.d/custom.cnf"
+      ports:
+            - '3306:3306'
+  php:
+        volumes:
+            - "./docker/etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+            - "./:/var/www/html"
+        ports:
+            - "8000:8000"
+        build:
+            context: docker
+            dockerfile: ../docker/Dockerfile
+
+volumes:
+  mysql:
+  php:

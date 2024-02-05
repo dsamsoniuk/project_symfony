@@ -1,0 +1,12 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+    prefix: /{_locale}
+
+app_class_attributes:
+    # loads routes from the PHP attributes of the given class
+    resource: App\Controller\DefaultController
+    type: attribute
+
